@@ -41,6 +41,7 @@ ENV PATH /usr/share/elasticsearch/bin:$PATH
 WORKDIR /usr/share/elasticsearch
 # Plugins
 RUN bin/elasticsearch-plugin install -b "com.floragunn:search-guard-5:$ELASTICSEARCH_VERSION-14"
+RUN curl -L http://search.maven.org/remotecontent?filepath=com/floragunn/dlic-search-guard-rest-api/5.3-5/dlic-search-guard-rest-api-5.3-5-jar-with-dependencies.jar > /usr/share/elasticsearch/plugins/search-guard-5
 
 RUN  mkdir -p /.backup/elasticsearch/
 RUN set -ex \
