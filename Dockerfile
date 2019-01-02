@@ -42,20 +42,14 @@ RUN apk add --no-cache -t .build-deps gnupg \
   chown -R elasticsearch:elasticsearch "$path"; \
   done \
   && rm -rf /install \
-  && rm /elasticsearch/config/elasticsearch.yml \
   && rm -rf /elasticsearch/modules/x-pack-ml \
   && rm -rf /elasticsearch/modules/x-pack-security \
   && apk del --purge .build-deps
 
-
-RUN  mkdir -p /.backup/elasticsearch/
-COPY config /.backup/elasticsearch/config
-
 VOLUME /elasticsearch/config
-VOLUME /elasticsearch/data
-EXPOSE 9200 9300
+VOLUME /opt/elasticsearch/
 
-# env
+EXPOSE 9200 9300
 ENV CLUSTER_NAME="elasticsearch-default" \
     MINIMUM_MASTER_NODES=1 \
     HOSTS="127.0.0.1, [::1]" \
@@ -64,18 +58,9 @@ ENV CLUSTER_NAME="elasticsearch-default" \
     NODE_DATA=true \
     NODE_INGEST=true \
     HTTP_ENABLE=true \
-    HTTP_CORS_ENABLE=true \
-    HTTP_CORS_ALLOW_ORIGIN=* \
     NETWORK_HOST="0.0.0.0" \
-    ELASTIC_PWD="changeme" \
-    KIBANA_PWD="changeme" \
-    LOGSTASH_PWD="changeme" \
-    BEATS_PWD="changeme" \
     HEAP_SIZE="1g" \
-    CA_PWD="changeme" \
-    TS_PWD="changeme" \
-    KS_PWD="changeme" \
-		HTTP_SSL=true \
+    HTTP_SSL=true \
     LOG_LEVEL=INFO
 
 COPY ./src/ /run/
