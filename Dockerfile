@@ -4,8 +4,8 @@ LABEL maintainer="Guillaume Simonneau <simonneaug@gmail.com>"
 LABEL description="elasticsearch search-guard"
 
 ENV ES_TMPDIR "/tmp"
-ENV ES_VERSION 6.5.4
-ENV SG_VERSION "24.0"
+ENV ES_VERSION 6.8.1
+ENV SG_VERSION "25.1"
 ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
 ENV ES_TARBALL_ASC "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz.asc"
